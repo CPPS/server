@@ -1,9 +1,0 @@
-{
-  "database" : {
-    "host" : false,
-    "database" : false,
-    "username" : false,
-    "password" : "abc",
-    "driver" : "sqlite"
-  }
-}
