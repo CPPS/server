@@ -20,6 +20,6 @@ var Contest = database.define('contest', {
     }
 });
 
-Contest.belongsTo(Provider, {as: "Provider"});
+Contest.belongsTo(Provider);
 
 module.exports = Contest;

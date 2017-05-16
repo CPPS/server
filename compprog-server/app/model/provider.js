@@ -22,7 +22,6 @@ var Provider = database.define('provider', {
     instanceMethods: {
         toJSON: model.data(function (data) {
             data.hideTimestamps();
-            data.hide('id');
         })
     }
 });
