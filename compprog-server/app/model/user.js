@@ -1,4 +1,7 @@
-module.exports = sequelize.define('user', {
+var Sequelize = require('sequelize');
+var database = require('../database');
+
+var User = database.define('user', {
     firstName: {
         type: Sequelize.STRING
     },
@@ -6,3 +9,5 @@ module.exports = sequelize.define('user', {
         type: Sequelize.STRING
     }
 });
+
+module.exports = User;

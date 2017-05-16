@@ -1,0 +1,37 @@
+var database = require('../app/database');
+
+var User = require('../app/model/user');
+var Provider = require('../app/model/provider');
+var Contest = require('../app/model/contest');
+
+function migrate () {
+    User.sync({"force": true});
+
+    Provider.sync({"force": true}).then(function () {
+        Contest.sync({"force": true}).then(function () {
+            var provider = Provider.create({
+                name: 'DOMJudge',
+                endpoint: 'compprog.win.tue.nl/domjudge'
+            });
+
+            var contest = Contest.create({
+                name: 'DOMJudge',
+                endpoint: 'compprog.win.tue.nl/domjudge'
+            });
+
+            contest.setProvider(provider);
+        }).catch(function (err) {
+            console.error('Unable to connect to the database:', err);
+        });
+    });
+}
+
+database
+    .authenticate()
+    .then(function (err) {
+        console.log('Connection has been established successfully.');
+        migrate();
+    })
+    .catch(function (err) {
+        console.error('Unable to connect to the database:', err);
+    });
