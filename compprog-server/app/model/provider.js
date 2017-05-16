@@ -1,5 +1,5 @@
 var Sequelize = require('sequelize');
-var database = require('../../utils/database');
+var database = require('../../utils/database')();
 
 var Provider = database.define('provider', {
     id: {
