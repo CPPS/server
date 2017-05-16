@@ -5,7 +5,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var logger = require('./utils/logger.js');
-var db = require('./utils/database.js')();
 
 var api = require('./routes/api');
 

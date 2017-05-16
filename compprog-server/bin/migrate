@@ -1,4 +1,4 @@
-var database = require('../app/database');
+var database = require('../utils/database');
 
 var User = require('../app/model/user');
 var Provider = require('../app/model/provider');

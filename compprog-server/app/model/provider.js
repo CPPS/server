@@ -1,5 +1,6 @@
 var Sequelize = require('sequelize');
 var database = require('../../utils/database');
+var model = require('../../utils/model');
 
 var Provider = database.define('provider', {
     id: {
@@ -17,16 +18,13 @@ var Provider = database.define('provider', {
         type: Sequelize.STRING,
         allowNull: false
     }
+}, {
+    instanceMethods: {
+        toJSON: model.data(function (data) {
+            data.hideTimestamps();
+            data.hide('id');
+        })
+    }
 });
-
-Provider.render = function (data) {
-    data = data.dataValues;
-
-    delete data.id;
-    delete data.createdAt;
-    delete data.updatedAt;
-
-    return data;
-};
 
 module.exports = Provider;
