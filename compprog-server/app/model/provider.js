@@ -19,4 +19,14 @@ var Provider = database.define('provider', {
     }
 });
 
+Provider.render = function (data) {
+    data = data.dataValues;
+
+    delete data.id;
+    delete data.createdAt;
+    delete data.updatedAt;
+
+    return data;
+};
+
 module.exports = Provider;

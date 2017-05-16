@@ -6,22 +6,19 @@ var Contest = require('../app/model/contest');
 
 function migrate () {
     User.sync({"force": true});
-
     Provider.sync({"force": true}).then(function () {
         Contest.sync({"force": true}).then(function () {
             var provider = Provider.create({
                 name: 'DOMJudge',
                 endpoint: 'compprog.win.tue.nl/domjudge'
+            }).then(function (provider) {
+                Contest.create({
+                    name: 'DOMJudge',
+                    endpoint: 'compprog.win.tue.nl/domjudge'
+                }).then(function (contest) {
+                    contest.setProvider(provider);
+                });
             });
-
-            var contest = Contest.create({
-                name: 'DOMJudge',
-                endpoint: 'compprog.win.tue.nl/domjudge'
-            });
-
-            contest.setProvider(provider);
-        }).catch(function (err) {
-            console.error('Unable to connect to the database:', err);
         });
     });
 }
