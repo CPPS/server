@@ -2,6 +2,8 @@ var Sequelize = require('sequelize');
 var database = require('../../utils/database');
 var model = require('../../utils/model');
 
+var Contest = require('./Contest');
+
 var Provider = database.define('provider', {
     id: {
         type: Sequelize.INTEGER,
@@ -10,6 +12,17 @@ var Provider = database.define('provider', {
     },
 
     name: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+
+    description: {
+        type: Sequelize.TEXT,
+        defaultValue: "",
+        allowNull: false
+    },
+
+    type: {
         type: Sequelize.STRING,
         allowNull: false
     },
@@ -30,5 +43,8 @@ var Provider = database.define('provider', {
         })
     }
 });
+
+Provider.hasMany(Contest, {foreignKey: 'providerId'});
+Contest.belongsTo(Provider, {foreignKey: 'providerId'});
 
 module.exports = Provider;

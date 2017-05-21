@@ -2,7 +2,7 @@ var Sequelize = require('sequelize');
 var database = require('../../utils/database');
 var model = require('../../utils/model');
 
-var Contest = require('./contest');
+var Contest = require('./Contest');
 
 var Group = database.define('group', {
     id: {

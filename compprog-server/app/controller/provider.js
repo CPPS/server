@@ -1,41 +1,30 @@
-var validate = require('validate.js');
-var Provider = require('../model/provider');
+var Controller = require('../../utils/controller');
+var Provider = require('../model/Provider');
+
 
 var controller = {};
 
 controller.get_provider = function(req, res, next) {
-    var id = req.params.id;
-
-    var validation_error = validate({id: id}, {
-        id: {
-            presence: true,
-            numericality: {
-                onlyInteger: true
-            }
-        }
-    });
-
-    if (validation_error) {
-        return res.status(400).send(validation_error);
-    }
-
-    Provider.findById(id).then(function (data) {
-        if (data) {
-            return res.send(data);
-        }
-
-        return next();
-    }).catch(function (err) {
-        return next(err);
+    var controller = new Controller(req, res, next);
+    controller.findByID(Provider, function (provider) {
+        return res.send(provider);
     });
 };
 
-controller.get_providers = function(req, res, next) {
-    Provider.findAll().then(function (data) {
-        res.send(data);
-    }).catch(function (err) {
-        next(err);
+controller.get_provider_contests = function(req, res, next) {
+    var controller = new Controller(req, res, next);
+    controller.findByID(Provider, function (provider) {
+        provider.getContests().then(function (contests) {
+            return res.send(contests);
+        }).catch(next);
     });
+};
+
+controller.get_providers = function (req, res, next) {
+    var controller = new Controller(req, res, next);
+    controller.findAll(Provider, function (providers) {
+        return res.send(providers);
+    })
 };
 
 module.exports = controller;

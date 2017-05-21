@@ -1,20 +1,24 @@
 var migration = require('../utils/migration');
 
-var Provider = require('../app/model/provider');
-var Contest = require('../app/model/contest');
+var Provider = require('../app/model/Provider');
+var Contest = require('../app/model/Contest');
 
 migration.seed(function () {
-    Provider.create({
-        name: 'DOMJudge',
+    Contest.create({
+        name: 'cpps',
+        type: 'domjugde-contest',
+        visibility: 'public',
         endpoint: 'compprog.win.tue.nl/domjudge',
         client_endpoint: 'compprog.win.tue.nl/domjudge/public'
-    }).then(function (provider) {
-        Contest.create({
-            name: 'DOMJudge',
+    }).then(function (contest) {
+        Provider.create({
+            name: 'compprog-server',
+            description: 'Practise server for the Competitive Programming and Problem Solving honors track',
+            type: 'domjugde-provider',
             endpoint: 'compprog.win.tue.nl/domjudge',
             client_endpoint: 'compprog.win.tue.nl/domjudge/public'
-        }).then(function (contest) {
-            contest.setProvider(provider);
+        }).then(function (provider) {
+            provider.addContest(contest)
         });
     });
 });

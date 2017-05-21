@@ -1,40 +1,37 @@
-var validate = require('validate.js');
-var Contest = require('../model/contest');
+var Controller = require('../../utils/controller');
+var Contest = require('../model/Contest');
 
 var controller = {};
 
 controller.get_contest = function(req, res, next) {
-    var id = req.params.id;
-
-    var validation_error = validate({id: id}, {
-        id: {
-            presence: true,
-            numericality: {
-                onlyInteger: true
-            }
-        }
+    var controller = new Controller(req, res, next);
+    controller.findByID(Contest, function (contest) {
+        return res.send(contest);
     });
+};
 
-    if (validation_error) {
-        return res.status(400).send(validation_error);
-    }
+controller.get_contest_users = function(req, res, next) {
+    var controller = new Controller(req, res, next);
+    controller.findByID(Contest, function (contest) {
+        contest.getUsers().then(function (users) {
+            return res.send(users);
+        }).catch(next)
+    });
+};
 
-    Contest.findById(id).then(function (data) {
-        if (data) {
-            return res.send(data);
-        }
-
-        return next();
-    }).catch(function (err) {
-        return next(err);
+controller.get_contest_provider = function(req, res, next) {
+    var controller = new Controller(req, res, next);
+    controller.findByID(Contest, function (contest) {
+        contest.getProvider().then(function (provider) {
+            return res.send(provider);
+        }).catch(next)
     });
 };
 
 controller.get_contests = function(req, res, next) {
-    Contest.findAll().then(function (data) {
-        res.send(data);
-    }).catch(function (err) {
-        next(err);
+    var controller = new Controller(req, res, next);
+    controller.findAll(Contest, function (contests) {
+        return res.send(contests);
     });
 };
 

@@ -2,7 +2,7 @@ var Sequelize = require('sequelize');
 var database = require('../../utils/database');
 var model = require('../../utils/model');
 
-var Provider = require('./provider');
+var User = require('./User');
 
 var Contest = database.define('contest', {
     id: {
@@ -13,6 +13,17 @@ var Contest = database.define('contest', {
 
     name: {
         type: Sequelize.STRING,
+        allowNull: false
+    },
+
+    type: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+
+    visibility: {
+        type:   Sequelize.ENUM,
+        values: ['public', 'protected', 'private'],
         allowNull: false
     },
 
@@ -34,6 +45,7 @@ var Contest = database.define('contest', {
     }
 });
 
-Contest.belongsTo(Provider);
+User.belongsToMany(Contest, {through: 'contest_users' });
+Contest.belongsToMany(User, {through: 'contest_users' });
 
 module.exports = Contest;

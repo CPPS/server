@@ -15,6 +15,7 @@ router.get('/config', function (req, res, next) {
     res.send(config)
 });
 
+router.use('/', require('./user'));
 router.use('/', require('./provider'));
 router.use('/', require('./contest'));
 
