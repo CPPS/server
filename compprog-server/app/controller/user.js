@@ -1,12 +1,15 @@
+var validate = require('validate.js');
 var Controller = require('../../utils/controller');
-var User = require('../model/User');
+var User = require('../model/user');
+var passport = require('passport');
+
 
 var controller = {};
 
 controller.get_user = function(req, res, next) {
     var controller = new Controller(req, res, next);
 
-    controller.findByID(User, {}, function (user) {
+    controller.findByID(User, function (user) {
         return res.send(user);
     });
 };
@@ -14,7 +17,7 @@ controller.get_user = function(req, res, next) {
 controller.get_user_contests = function(req, res, next) {
     var controller = new Controller(req, res, next);
 
-    controller.findByID(User, {}, function (user) {
+    controller.findByID(User, function (user) {
         user.getContests().this(function () {
             return res.send(user);
         }).catch(next);
@@ -82,7 +85,7 @@ controller.login = function(req, res, next) {
     };
 
     controller.validate(credentials, credential_constraints, function () {
-        var same_username = { where: { username: credentials.username }};
+        var same_username = {where: {username: credentials.username}};
         controller.find(User, same_username, function (user) {
             if (user && user.authenticate(credentials.password)) {
                 // TODO handle successful login
@@ -92,6 +95,18 @@ controller.login = function(req, res, next) {
             }
         });
     });
+};
+
+controller.login_tue_user = function(req, res, next) {
+    var redirectTo = req.session.returnTo || '/profile';
+    delete req.session.returnTo; // remove redirect destination in session
+
+    // use custom TU/e login strategy
+    passport.authenticate('tue-login', {
+        successRedirect: redirectTo,
+        failureRedirect: '/tuelogin',
+        failureFlash: true
+    })(req, res, next);
 };
 
 module.exports = controller;

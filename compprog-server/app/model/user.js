@@ -15,6 +15,11 @@ var User = database.define('user', {
         defaultValue: "",
         allowNull: false
     },
+    tueId: {
+        type: Sequelize.STRING,
+        unique: true,
+        allowNull: true // non-TUE users will have tueId set to null
+    },
     username: {
         type: Sequelize.STRING,
         unique: true,
@@ -23,7 +28,7 @@ var User = database.define('user', {
     email: {
         type: Sequelize.STRING,
         defaultValue: "",
-        allowNull: false
+        allowNull: false // all accounts must have an email address
     },
     password: {
         type: Sequelize.STRING

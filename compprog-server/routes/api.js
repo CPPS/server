@@ -18,5 +18,6 @@ router.get('/config', function (req, res, next) {
 router.use('/', require('./user'));
 router.use('/', require('./provider'));
 router.use('/', require('./contest'));
+router.use('/', require('./user'));
 
 module.exports = router;

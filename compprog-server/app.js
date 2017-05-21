@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var validate = require('validate.js');
 var passport = require('passport');
 var flash = require('connect-flash');
+var session = require('express-session');
 var config = require('./config/app.json');
 
 var logger = require('./utils/logger.js');
@@ -13,8 +14,14 @@ var logger = require('./utils/logger.js');
 validate.options = {format: "flat"};
 
 var app = express();
-
 app.set('config', config);
+
+// authentication
+app.use(session({secret: config.sessions.secret}));
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+app.use(flash());
+require('./auth/passport')(passport);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -28,7 +35,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+var routes = require('./routes/routes');
 var api = require('./routes/api');
+app.use('/', routes);
 app.use('/api', api);
 
 // catch 404 and forward to error handler
