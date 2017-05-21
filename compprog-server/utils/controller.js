@@ -24,6 +24,22 @@ var Controller = function (req, res, next) {
         return this.validate({id: req.params.id }, this.constraints.validID, handler);
     };
 
+    this.find = function (model, options, handler) {
+        model.findOne(options).then(function (element) {
+            return handler(element);
+        }).catch(next);
+    };
+
+    this.exists = function (model, options, handler) {
+        this.find(model, options, function (element) {
+            if (element) {
+                return handler(true);
+            } else {
+                return handler(false);
+            }
+        })
+    };
+
     this.findByID = function (model, handler) {
         this.validate_id(function () {
             model.findById(req.params.id).then(function (element) {
@@ -36,8 +52,8 @@ var Controller = function (req, res, next) {
         });
     };
 
-    this.findAll = function (model, handler) {
-        model.findAll().then(function (elements) {
+    this.findAll = function (model, options, handler) {
+        model.findAll(options).then(function (elements) {
             handler(elements)
         }).catch(next);
     };

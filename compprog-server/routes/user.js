@@ -9,4 +9,8 @@ router.get('/user/:id', user_controller.get_user);
 
 router.get('/user/:id/contests', user_controller.get_user_contests);
 
+router.post('/user', user_controller.register);
+
+router.post('/login', user_controller.login);
+
 module.exports = router;

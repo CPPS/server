@@ -3,15 +3,18 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var validate = require('validate.js')
+var validate = require('validate.js');
+var passport = require('passport');
+var flash = require('connect-flash');
+var config = require('./config/app.json');
 
 var logger = require('./utils/logger.js');
 
-var api = require('./routes/api');
+validate.options = {format: "flat"};
 
 var app = express();
 
-validate.options = {format: "flat"};
+app.set('config', config);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -25,6 +28,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+var api = require('./routes/api');
 app.use('/api', api);
 
 // catch 404 and forward to error handler
