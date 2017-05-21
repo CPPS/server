@@ -17,6 +17,11 @@ var Provider = database.define('provider', {
     endpoint: {
         type: Sequelize.STRING,
         allowNull: false
+    },
+
+    client_endpoint: {
+        type: Sequelize.STRING,
+        allowNull: false
     }
 }, {
     instanceMethods: {

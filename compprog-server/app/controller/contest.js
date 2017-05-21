@@ -1,9 +1,9 @@
 var validate = require('validate.js');
-var Provider = require('../model/provider');
+var Contest = require('../model/contest');
 
 var controller = {};
 
-controller.get_provider = function(req, res, next) {
+controller.get_contest = function(req, res, next) {
     var id = req.params.id;
 
     var validation_error = validate({id: id}, {
@@ -19,7 +19,7 @@ controller.get_provider = function(req, res, next) {
         return res.status(400).send(validation_error);
     }
 
-    Provider.findById(id).then(function (data) {
+    Contest.findById(id).then(function (data) {
         if (data) {
             return res.send(data);
         }
@@ -30,8 +30,8 @@ controller.get_provider = function(req, res, next) {
     });
 };
 
-controller.get_providers = function(req, res, next) {
-    Provider.findAll().then(function (data) {
+controller.get_contests = function(req, res, next) {
+    Contest.findAll().then(function (data) {
         res.send(data);
     }).catch(function (err) {
         next(err);

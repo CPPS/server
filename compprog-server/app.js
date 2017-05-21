@@ -3,12 +3,15 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var validate = require('validate.js')
 
 var logger = require('./utils/logger.js');
 
 var api = require('./routes/api');
 
 var app = express();
+
+validate.options = {format: "flat"};
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

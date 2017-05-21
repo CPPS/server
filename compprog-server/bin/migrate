@@ -8,13 +8,15 @@ function migrate () {
     User.sync({"force": true});
     Provider.sync({"force": true}).then(function () {
         Contest.sync({"force": true}).then(function () {
-            var provider = Provider.create({
+            Provider.create({
                 name: 'DOMJudge',
-                endpoint: 'compprog.win.tue.nl/domjudge'
+                endpoint: 'compprog.win.tue.nl/domjudge',
+                client_endpoint: 'compprog.win.tue.nl/domjudge/public'
             }).then(function (provider) {
                 Contest.create({
                     name: 'DOMJudge',
-                    endpoint: 'compprog.win.tue.nl/domjudge'
+                    endpoint: 'compprog.win.tue.nl/domjudge',
+                    client_endpoint: 'compprog.win.tue.nl/domjudge/public'
                 }).then(function (contest) {
                     contest.setProvider(provider);
                 });

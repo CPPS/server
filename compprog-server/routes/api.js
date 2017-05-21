@@ -16,5 +16,6 @@ router.get('/config', function (req, res, next) {
 });
 
 router.use('/', require('./provider'));
+router.use('/', require('./contest'));
 
 module.exports = router;
