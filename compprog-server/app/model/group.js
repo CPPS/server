@@ -2,9 +2,9 @@ var Sequelize = require('sequelize');
 var database = require('../../utils/database');
 var model = require('../../utils/model');
 
-var Provider = require('./provider');
+var Contest = require('./contest');
 
-var Contest = database.define('contest', {
+var Group = database.define('group', {
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -14,18 +14,7 @@ var Contest = database.define('contest', {
     name: {
         type: Sequelize.STRING,
         allowNull: false
-    },
-
-    endpoint: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-
-    client_endpoint: {
-        type: Sequelize.STRING,
-        allowNull: false
     }
-
 }, {
     instanceMethods: {
         toJSON: model.data(function (data) {
@@ -34,6 +23,6 @@ var Contest = database.define('contest', {
     }
 });
 
-Contest.belongsTo(Provider);
+Group.hasMany(Contest, {as: 'contests'});
 
-module.exports = Contest;
+module.exports = Group;

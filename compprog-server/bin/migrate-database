@@ -1,0 +1,17 @@
+var migration = require('../utils/migration');
+
+migration.migrate([
+    migration.model(require('../app/model/user')),
+
+    migration.model(require('../app/model/visibility'), function (model) {
+        model.create({name: 'public'});
+        model.create({name: 'protected'});
+        model.create({name: 'private'});
+    }),
+
+    migration.model(require('../app/model/provider')),
+
+    migration.model(require('../app/model/contest')),
+
+    migration.model(require('../app/model/group'))
+]);

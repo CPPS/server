@@ -1,0 +1,20 @@
+var migration = require('../utils/migration');
+
+var Provider = require('../app/model/provider');
+var Contest = require('../app/model/contest');
+
+migration.seed(function () {
+    Provider.create({
+        name: 'DOMJudge',
+        endpoint: 'compprog.win.tue.nl/domjudge',
+        client_endpoint: 'compprog.win.tue.nl/domjudge/public'
+    }).then(function (provider) {
+        Contest.create({
+            name: 'DOMJudge',
+            endpoint: 'compprog.win.tue.nl/domjudge',
+            client_endpoint: 'compprog.win.tue.nl/domjudge/public'
+        }).then(function (contest) {
+            contest.setProvider(provider);
+        });
+    });
+});

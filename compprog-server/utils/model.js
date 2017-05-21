@@ -1,4 +1,4 @@
-var model = {}
+var model = {};
 
 model.data = function (handler) {
     return function () {

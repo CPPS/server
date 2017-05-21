@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="bin\migrate" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="project" path-to-js-file="bin/migrate" working-dir="$PROJECT_DIR$">
+  <configuration default="false" name="bin\migrate" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="project" path-to-js-file="bin/migrate-database" working-dir="$PROJECT_DIR$">
     <EXTENSION ID="com.jetbrains.nodejs.remote.docker.NodeJSDockerRunConfigurationExtension">
       <option name="envVars">
         <list />
