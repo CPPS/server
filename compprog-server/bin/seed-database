@@ -1,7 +1,7 @@
-var migration = require('../utils/migration');
+var migration = require('../service/migration');
 
-var Provider = require('../app/model/Provider');
-var Contest = require('../app/model/Contest');
+var Provider = require('../model/Provider');
+var Contest = require('../model/Contest');
 
 migration.seed(function () {
     Contest.create({

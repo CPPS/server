@@ -1,6 +1,6 @@
 var LocalStrategy = require('passport-local').Strategy;
-var User = require('./../../app/model/user');
-var config = require('./../../config/app.json');
+var User = require('../../../model/user');
+var config = require('../../../config/app.json');
 
 // LDAP authentication, used by TU/e
 var ldap = require('ldapjs');

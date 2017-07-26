@@ -1,4 +1,4 @@
-var database = require('../utils/database');
+var database = require('./database');
 
 var migration = {};
 

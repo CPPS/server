@@ -1,5 +1,5 @@
 var validate = require('validate.js');
-var Controller = require('../../utils/controller');
+var Controller = require('../service/controller');
 var User = require('../model/user');
 var passport = require('passport');
 

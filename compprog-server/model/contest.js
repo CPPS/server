@@ -1,6 +1,6 @@
 var Sequelize = require('sequelize');
-var database = require('../../utils/database');
-var model = require('../../utils/model');
+var database = require('../../service/database');
+var model = require('../../service/model');
 
 var User = require('./User');
 

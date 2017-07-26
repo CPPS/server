@@ -1,11 +1,11 @@
-var migration = require('../utils/migration');
+var migration = require('../service/migration');
 
 migration.migrate([
-    migration.model(require('../app/model/User')),
+    migration.model(require('../model/User')),
 
-    migration.model(require('../app/model/Contest')),
+    migration.model(require('../model/Contest')),
 
-    migration.model(require('../app/model/Provider')),
+    migration.model(require('../model/Provider')),
 
-    migration.model(require('../app/model/Group'))
+    migration.model(require('../model/Group'))
 ]);

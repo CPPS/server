@@ -9,7 +9,7 @@ var flash = require('connect-flash');
 var session = require('express-session');
 var config = require('./config/app.json');
 
-var logger = require('./utils/logger.js');
+var logger = require('./service/logger.js');
 
 validate.options = {format: "flat"};
 
@@ -21,7 +21,7 @@ app.use(session({secret: config.sessions.secret}));
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash());
-require('./auth/passport')(passport);
+require('./service/auth/passport')(passport);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

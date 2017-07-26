@@ -4,6 +4,9 @@
       <env name="DEBUG" value="server:*" />
     </envs>
     <browser name="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" url="http://localhost:8500/" />
+    <EXTENSION ID="com.jetbrains.nodejs.run.NodeJSStartBrowserRunConfigurationExtension">
+      <browser name="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" url="http://localhost:8500/" />
+    </EXTENSION>
     <method />
   </configuration>
 </component>

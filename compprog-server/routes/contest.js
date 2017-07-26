@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var contest_controller = require('../app/controller/contest');
+var contest_controller = require('../controller/contest');
 
 router.get('/contests', contest_controller.get_contests);
 

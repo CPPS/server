@@ -1,5 +1,5 @@
-var Controller = require('../../utils/controller');
-var Provider = require('../model/Provider');
+var Controller = require('../service/controller');
+var Provider = require('../model/provider');
 
 
 var controller = {};

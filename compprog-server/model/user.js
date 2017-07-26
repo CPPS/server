@@ -1,8 +1,8 @@
 var Sequelize = require('sequelize');
 var crypto = require('crypto');
 var bcrypt   = require('bcrypt-nodejs');
-var database = require('../../utils/database');
-var model = require('../../utils/model');
+var database = require('../service/database');
+var model = require('../service/model');
 
 var User = database.define('user', {
     id: {

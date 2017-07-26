@@ -1,5 +1,5 @@
-var Controller = require('../../utils/controller');
-var Contest = require('../model/Contest');
+var Controller = require('../../service/controller');
+var Contest = require('../../model/Contest');
 
 var controller = {};
 

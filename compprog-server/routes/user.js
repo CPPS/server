@@ -3,7 +3,7 @@ var passport = require('passport');
 var util = require('./routeUtil');
 var router = express.Router();
 
-var user_controller = require('../app/controller/user');
+var user_controller = require('../controller/user');
 
 router.get('/users', user_controller.get_users);
 
